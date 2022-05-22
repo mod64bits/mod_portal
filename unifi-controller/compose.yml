@@ -1,0 +1,37 @@
+version: '2.3'
+services:
+  mongo:
+    image: mongo:3.6
+    network_mode: host
+    restart: always
+    volumes:
+      - ./mongo_db:/data/db
+      - ./mongo/dbcfg:/data/configdb
+    command: mongod --port 29718
+  controller:
+    image: "jacobalberty/unifi:latest"
+    depends_on:
+      - mongo
+    init: true
+    network_mode: host
+    restart: always
+    volumes:
+      - ./unifi_dir:/unifi
+      - ./unifi_data:/unifi/data
+      - ./unifi_log:/unifi/log
+      - ./unifi_cert:/unifi/cert
+      - ./unifi_init:/unifi/init.d
+      - ./unifi_run:/var/run/unifi
+      - ./unifi_backup:/unifi/data/backup
+    environment:
+      - DB_URI=mongodb://localhost:29718/unifi
+      - STATDB_URI=mongodb://localhost:29718/unifi_stat
+      - DB_NAME=unifi
+  logs:
+    image: bash
+    depends_on:
+      - controller
+    command: bash -c 'tail -F /unifi/log/*.log'
+    restart: always
+    volumes:
+      - ./unifi_log:/unifi/log

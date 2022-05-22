@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  postgres-portal:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "mod64!"
+    ports:
+      - "5432:5432"
+    volumes:
+      - /app/PostgreSQL:/var/lib/postgresql/data
+    networks:
+      - portal-network
+
+  pgadmin-portal:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "mod64bits@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "Mod64!"
+    ports:
+      - "8090:80"
+    depends_on:
+      - postgres-portal
+    networks:
+      - portal-network
+
+networks:
+  portal-network:
+    external: true
+    # driver: bridge

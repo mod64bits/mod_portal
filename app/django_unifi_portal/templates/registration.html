@@ -1,0 +1,29 @@
+{% extends 'base_form.html' %}
+{% load material_form %}
+
+{% block extrahead %}
+<style type="text/css">
+    {{ form.css }}
+</style>
+{% endblock %}
+
+{% block formclass %}{{ form.blockclass|default:"col s12 m8 offset-m2 l8 offset-l2" }}{% endblock %}
+
+
+{% block formtitle %}{% endblock %}
+
+{% block formbody %}
+
+    <p style="text-align:center"> <img src="{{ logo }}"></p><br>
+
+   <div style='text-align:center;margin-bottom: 30px'>
+        <h6>Register to <b>{{ ssid }}</b> free WIFI</h6>
+        <h6>If you have an account, you can log in with your E-mail and your password. If you have no account, please register using the following form.</h6>
+    </div>
+
+    {% include form.template %}
+{% endblock %}
+
+{% block formbuttons %}
+    {% include form.buttons %}
+{% endblock %}
