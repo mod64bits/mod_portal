@@ -19,3 +19,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
+if os.environ.get('RUN_MAIN') == 'true':
+    import ptvsd
+    ptvsd.enable_attach("HdFkU9c4zfPPGSkgcPZV", address = ('0.0.0.0', 3005))

@@ -4,10 +4,13 @@ services:
   web:
     build: ./app
     command: python manage.py runserver 0.0.0.0:80
+    environment:
+      - PYTHONUNBUFFERED=0
     volumes:
       - ./app/:/usr/src/app/
     ports:
       - 80:80
+      - 3000-3020:3000-3020
     env_file:
       - ./.env.dev
     
