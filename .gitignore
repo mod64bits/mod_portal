@@ -134,3 +134,6 @@ dmypy.json
 .pyre/
 config.py
 .vscode/
+unifi-controller/mongo_db/
+unifi-controller/unifi_data/
+node_modules/
