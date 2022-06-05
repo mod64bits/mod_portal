@@ -40,8 +40,14 @@ class UpdateUserView(UpdateView):
     form_class = UserForm
     template_name = "dashboard/update_user.html"
 
-    # def get_object(self):
-    #     return self.object.pk
+    def get_user_infor(self):
+        user_data = UnifiUser.objects.get(user=self.object.pk)
+        user_infor = {
+            "phone": user_data.phone,
+            "photo": user_data.picture.url,
+        }
+
+        return user_infor
 
     def get_context_data(self, **kwargs):
         context = super(UpdateUserView, self).get_context_data(**kwargs)
@@ -49,6 +55,7 @@ class UpdateUserView(UpdateView):
             context['user_formset'] = UpdateUserFormset(self.request.POST, self.request.FILES, instance=self.object)
         else:
             context['user_formset'] = UpdateUserFormset(instance=self.object)
+        context['user_data'] = self.get_user_infor()
         return context
 
     def post(self, request, *args, **kwargs):

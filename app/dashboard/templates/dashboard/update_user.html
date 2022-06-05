@@ -1,4 +1,5 @@
 {% extends 'dashboard/base.html' %}
+{% load static %}
 {% load widget_tweaks %}
 
 {% block titulo %}Dashboard {{object}} {% endblock titulo %}
@@ -106,16 +107,15 @@
           <div class="card card-profile">
             <div class="card-avatar">
               <a href="#pablo">
-                <img class="img" src="../../assets/img/faces/marc.jpg" />
+                <img class="img" src="{{ user_data.photo }}" />
               </a>
             </div>
             <div class="card-body">
-              <h6 class="card-category text-gray">CEO / Co-Founder</h6>
-              <h4 class="card-title">Alec Thompson</h4>
-              <p class="card-description">
-                Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-              </p>
-              <a href="#pablo" class="btn btn-rose btn-round">Follow</a>
+              <h6 class="card-category text-gray">{{ user.email }} / {{ user_data.phone }}</h6>
+              <h4 class="card-title">{{ user.get_full_name }}</h4>
+              <h4 class="card-title">{{ user_data.picture.url }}</h4>
+
+              <a href="#pablo" class="btn btn-rose btn-round">Atualizar Avatar</a>
             </div>
           </div>
         </div>
