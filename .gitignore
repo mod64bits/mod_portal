@@ -137,3 +137,4 @@ config.py
 unifi-controller/mongo_db/
 unifi-controller/unifi_data/
 node_modules/
+app/staticfiles/

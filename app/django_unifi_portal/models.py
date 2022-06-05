@@ -21,6 +21,7 @@ class UnifiUser(models.Model):
     phone = models.CharField(max_length=255, null=True)
     guest_mac = models.CharField(max_length=255, null=True)
     last_backend_login = models.CharField(max_length=30, null=True)
+    created_at = models.DateTimeField('Cadastrado em', auto_now_add=True)
 
     def __unicode__(self):
         return self.user.username
