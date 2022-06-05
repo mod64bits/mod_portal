@@ -1,0 +1,144 @@
+{% extends 'dashboard/base.html' %}
+
+{% block titulo %}Dashboard{% endblock titulo %}
+
+{% block content %}
+
+<div class="content">
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-header card-header-warning card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">weekend</i>
+                </div>
+                <p class="card-category">Usuários</p>
+                <h3 class="card-title">{{ total_users }}</h3>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="material-icons text-danger">warning</i>
+                  <a href="#pablo">Get More Space...</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-header card-header-rose card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">equalizer</i>
+                </div>
+                <p class="card-category">Registros Hoje</p>
+                <h3 class="card-title">{{ registe_today }}</h3>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="material-icons">local_offer</i> Tracked from Google Analytics
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-header card-header-success card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">store</i>
+                </div>
+                <p class="card-category">Revenue</p>
+                <h3 class="card-title">$34,245</h3>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="material-icons">date_range</i> Last 24 Hours
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-header card-header-info card-header-icon">
+                <div class="card-icon">
+                  <i class="fa fa-twitter"></i>
+                </div>
+                <p class="card-category">Followers</p>
+                <h3 class="card-title">+245</h3>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="material-icons">update</i> Just Updated
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">assignment</i>
+                  </div>
+                  <h4 class="card-title">Lista de Usuarios</h4>
+                </div>
+                <div class="card-body">
+                  <div class="toolbar">
+                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                  </div>
+                  <div class="material-datatables">
+                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                      <thead>
+                        <tr>
+                          <th>Nome</th>
+                          <th>Sobrenome</th>
+                          <th>email</th>
+                          <th>Fone</th>
+                          <th>Ultimo Login</th>
+                          <th class="disabled-sorting text-right">Actions</th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Sobrenome</th>
+                            <th>email</th>
+                            <th>Fone</th>
+                            <th>Ultimo Login</th>
+                          <th class="text-right">Actions</th>
+                        </tr>
+                      </tfoot>
+                      <tbody>
+                        {% for userprofile in user_list %}
+                        <tr>
+                          <td>{{ userprofile.user.first_name }}</td>
+                          <td>{{ userprofile.user.last_name }}</td>
+                          <td>{{ userprofile.user.email }}</td>
+                          <td>{{ userprofile.phone }}</td>
+                          <td>{{ userprofile.last_backend_login }}</td>
+                          <td class="td-actions text-right">
+                          <a  href="{% url 'dashboard:user_update' userprofile.pk %}"   role="button" rel="tooltip" class="btn btn-success">
+                              <i class="material-icons">edit</i>
+                          </a>
+                            <button type="button" rel="tooltip" class="btn btn-danger">
+                              <i class="material-icons">close</i>
+                            </button>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <!-- end content-->
+              </div>
+              <!--  end card  -->
+            </div>
+            <!-- end col-md-12 -->
+          </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
